@@ -5,24 +5,42 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/7e58df9bea.js" crossorigin="anonymous"></script>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3 nav.sticky-top">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Suit</a>
+      <div class="collapse navbar-collapse justify-content-center">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">アイテム</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">ランキング</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">アバウト</a>
+          </li>
+        </ul>
+      </div>
+      <div class="form-inline justify-content-end">
+        <% if user_signed_in? %>
+          <%= link_to destroy_user_session_path, method: :delete do %><i class="fas fa-running fa-2x fa-fw"></i><% end %><span> | </span>
+          <%= link_to new_user_session_path do %><i class="fas fa-user-tie fa-2x fa-fw"></i><% end %>
+        <% else %>
+          <%= link_to new_user_registration_path do %><i class="fas fa-running fa-2x fa-fw"></i><% end %><span> | </span>
+          <%= link_to new_user_session_path do %><i class="fas fa-user-tie fa-2x fa-fw"></i><% end %>
+        <% end %>
+      </div>
+    </nav>
 
     <%= yield %>
   </body>
